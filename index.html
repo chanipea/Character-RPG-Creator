@@ -29,7 +29,7 @@
                         <!-- Create View (Left) -->
                         <div id="view-create-left" class="page-side page-left border-left">
                             <div class="page-header">
-                                <span class="header-icon">[CC]</span>
+                                <span class="header-icon">[+]</span>
                                 <h1 class="header-title">Character Customization</h1>
                             </div>
 
@@ -205,14 +205,14 @@
                             </div>
                         </div>
 
-                        <!-- Roster View (Left) -->
-                        <div id="view-roster-left" class="page-side page-left border-left hidden">
+                        <!-- Catalog View (Left) -->
+                        <div id="view-catalog-left" class="page-side page-left border-left hidden">
                             <div class="page-header">
                                 <span class="header-icon">[=]</span>
                                 <h1 class="header-title">My Characters</h1>
                             </div>
                             <div class="scroll-area">
-                                <div id="roster-grid" class="roster-grid">
+                                <div id="catalog-grid" class="catalog-grid">
                                     <div class="empty-state" id="empty-state">
                                         No characters saved yet. Create one!
                                     </div>
@@ -224,6 +224,7 @@
                     <div class="binding"></div>
 
                     <div class="page-wrapper">
+                        
                         <!-- Create View (Right) -->
                         <div id="view-create-right" class="page-side page-right border-right">
                             <div class="right-content">
@@ -249,7 +250,20 @@
                             </div>
                         </div>
 
-
+                        <!-- Catalog View (Right) -->
+                        <div id="view-catalog-right" class="page-side page-right border-right catalog-right-bg hidden">
+                            <div class="catalog-preview-wrapper">
+                                <div class="big-avatar-circle">
+                                    <div id="catalog-preview-sprite" class="avatar-sprite"></div>
+                                    <span id="catalog-preview-placeholder" class="placeholder-q">?</span>
+                                </div>
+                                <h2 class="catalog-title">Select Character</h2>
+                                <p class="catalog-subtitle">
+                                    Hover over a character to preview, or click to view full
+                                    profile.
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="tabs-container">
@@ -257,7 +271,7 @@
                             title="Create Character">
                             +
                         </div>
-                        <div id="tab-roster" onclick="switchTab('roster')" class="book-tab tab-love"
+                        <div id="tab-catalog" onclick="switchTab('catalog')" class="book-tab tab-love"
                             title="My Characters">
                             =
                         </div>

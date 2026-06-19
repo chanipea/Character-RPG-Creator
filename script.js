@@ -689,7 +689,7 @@ function switchTab(view) {
   var newRight = document.getElementById("view-" + view + "-right");
 
   var isForward = false;
-  if (view === "roster") {
+  if (view === "catalog") {
     isForward = true;
   }
 
@@ -715,7 +715,7 @@ function switchTab(view) {
     oldRight.classList.add("turn-forward-front");
     newLeft.classList.add("turn-forward-back");
 
-    renderRoster();
+    renderCatalog();
   } else {
     oldRight.style.zIndex = "10";
     newLeft.style.zIndex = "10";
@@ -791,8 +791,8 @@ function parseGifts(inputString) {
   return htmlResult;
 }
 
-function renderRoster() {
-  var grid = document.getElementById("roster-grid");
+function renderCatalog() {
+  var grid = document.getElementById("catalog-grid");
   var emptyState = document.getElementById("empty-state");
 
   if (appState.characters.length > 0) {
@@ -802,9 +802,9 @@ function renderRoster() {
     var lastIndex = appState.characters.length - 1;
     var latestCharacter = appState.characters[lastIndex];
 
-    document.getElementById("roster-preview-placeholder").style.display =
+    document.getElementById("catalog-preview-placeholder").style.display =
       "none";
-    document.getElementById("roster-preview-sprite").innerHTML =
+    document.getElementById("catalog-preview-sprite").innerHTML =
       generateSpriteSVG(latestCharacter.appearance, true);
   }
 
@@ -816,14 +816,14 @@ function renderRoster() {
 
 function createCharacterCard(characterData, index, gridElement) {
   var card = document.createElement("div");
-  card.className = "roster-card inset-shadow animate-pop";
+  card.className = "catalog-card inset-shadow animate-pop";
 
   card.onclick = function () {
     openModal(index);
   };
 
   card.onmouseenter = function () {
-    document.getElementById("roster-preview-sprite").innerHTML =
+    document.getElementById("catalog-preview-sprite").innerHTML =
       generateSpriteSVG(characterData.appearance, true);
   };
 
