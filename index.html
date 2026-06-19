@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,201 +8,321 @@
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    
+
     <!-- =========================================
         > structural skeleton
         ========================================= -->
 
-    <div class="book-container">
-        
-        <!-- Left Page: Canvas & Tools -->
-        <div class="page">
+    <body class="app-body">
+        <div class="app-container">
+            <div class="book-cover">
+                <!-- Scaled Corners -->
+                <div class="corner corner-tl"></div>
+                <div class="corner corner-tr"></div>
+                <div class="corner corner-bl"></div>
+                <div class="corner corner-br"></div>
 
-            <!-- CREATE VIEW -->
-            <div id="view-create-left">
-                <h2>Create Character</h2>
-                
-                <div class="wireframe-box">
-                    <div id="live-sprite" style="height: 250px;"></div>
+                <div class="book-inner">
+                    <div class="page-wrapper">
+                        <!-- Create View (Left) -->
+                        <div id="view-create-left" class="page-side page-left border-left">
+                            <div class="page-header">
+                                <span class="header-icon">[CC]</span>
+                                <h1 class="header-title">Character Customization</h1>
+                            </div>
 
-                    <div style="margin-top: 10px;">
-                        <button onclick="resetAppearance()">Reset</button>
-                        <button onclick="randomizeAppearance()">Random</button>
+                            <div class="scroll-area">
+                                <!-- Responsive Ordered List Layout -->
+                                <div class="create-top-section inset-shadow">
+                                    <!-- Left/Top: Portrait Canvas -->
+                                    <div class="portrait-col">
+                                        <div class="portrait-box shadow-inner">
+                                            <div id="live-sprite" class="live-sprite">
+                                                <!-- SVG injected here -->
+                                            </div>
+                                            <div class="portrait-btns">
+                                                <button onclick="resetAppearance()" class="icon-btn"
+                                                    title="Reset Appearance">
+                                                    &lt;&lt;
+                                                </button>
+                                                <button onclick="randomizeAppearance()" class="icon-btn"
+                                                    title="Randomize Appearance">
+                                                    ⚄
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right/Bottom: Organized Tools List -->
+                                    <div class="tools-col">
+                                        <!-- GROUP: BODY & FACE -->
+                                        <div class="tool-group">
+                                            <div class="tool-group-title">Body & Face</div>
+
+                                            <div class="customizer-row">
+                                                <span class="customizer-label">Skin</span>
+                                                <div class="customizer-actions">
+                                                    <div class="customizer-btn" title="Skin Color">
+                                                        <span class="btn-icon">✋︎</span>
+                                                        <input type="color" id="c-skin" value="#eec3a3" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="customizer-row">
+                                                <span class="customizer-label">Eyes</span>
+                                                <div class="customizer-actions">
+                                                    <div class="customizer-btn" title="Eye Color">
+                                                        <span class="btn-icon">👁</span>
+                                                        <input type="color" id="c-eye" value="#3377aa" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="customizer-row">
+                                                <span class="customizer-label">Face</span>
+                                                <div class="customizer-actions">
+                                                    <button type="button" class="customizer-btn" title="Face Style"
+                                                        onclick="cycleStyle('face')">
+                                                        <span class="btn-icon">☺</span>
+                                                    </button>
+                                                    <div class="customizer-btn" title="Face Color">
+                                                        <span class="btn-icon">🖌</span>
+                                                        <input type="color" id="c-face" value="#8b2f2f" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- GROUP: HAIR & HATS -->
+                                        <div class="tool-group">
+                                            <div class="tool-group-title">Hair & Hats</div>
+
+                                            <div class="customizer-row">
+                                                <span class="customizer-label">Hair</span>
+                                                <div class="customizer-actions">
+                                                    <button type="button" class="customizer-btn" title="Hair Style"
+                                                        onclick="cycleStyle('hair')">
+                                                        <span class="btn-icon">✄</span>
+                                                    </button>
+                                                    <div class="customizer-btn" title="Hair Color">
+                                                        <span class="btn-icon">🖌</span>
+                                                        <input type="color" id="c-hair" value="#2b2d3e" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="customizer-row">
+                                                <span class="customizer-label">Head</span>
+                                                <div class="customizer-actions">
+                                                    <button type="button" class="customizer-btn" title="Headwear Style"
+                                                        onclick="cycleStyle('head')">
+                                                        <span class="btn-icon">⌂</span>
+                                                    </button>
+                                                    <div class="customizer-btn" title="Headwear Color">
+                                                        <span class="btn-icon">🖌</span>
+                                                        <input type="color" id="c-head" value="#6699cc" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- GROUP: WARDROBE -->
+                                        <div class="tool-group">
+                                            <div class="tool-group-title">Wardrobe</div>
+
+                                            <div class="customizer-row">
+                                                <span class="customizer-label">Outfit</span>
+                                                <div class="customizer-actions">
+                                                    <button type="button" class="customizer-btn" title="Clothes Style"
+                                                        onclick="cycleStyle('clothes')">
+                                                        <span class="btn-icon">𖠋</span>
+                                                    </button>
+                                                    <div class="customizer-btn" title="Clothes Color">
+                                                        <span class="btn-icon">🖌</span>
+                                                        <input type="color" id="c-clothes" value="#39707e" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="customizer-row">
+                                                <span class="customizer-label">Shoes</span>
+                                                <div class="customizer-actions">
+                                                    <button type="button" class="customizer-btn" title="Shoe Style"
+                                                        onclick="cycleStyle('shoe')">
+                                                        <span class="btn-icon">𖠘</span>
+                                                    </button>
+                                                    <div class="customizer-btn" title="Shoe Color">
+                                                        <span class="btn-icon">🖌</span>
+                                                        <input type="color" id="c-shoe" value="#333333" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Form Details Array -->
+                                <div class="form-grid">
+                                    <div class="form-col">
+                                        <label class="form-label">Name</label>
+                                        <div class="form-input-wrapper">
+                                            <span class="input-icon">˙ᵕ˙</span>
+                                            <input type="text" id="f-name" class="list-input flex-grow" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <label class="form-label">Gender</label>
+                                        <div class="form-input-wrapper">
+                                            <span class="input-icon">⚤</span>
+                                            <input type="text" id="f-gender" class="list-input flex-grow" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <label class="form-label">Birthday</label>
+                                        <div class="form-input-wrapper">
+                                            <span class="input-icon">🗒</span>
+                                            <input type="text" id="f-bday" class="list-input flex-grow" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <label class="form-label">Home Name</label>
+                                        <div class="form-input-wrapper">
+                                            <span class="input-icon">🏠︎</span>
+                                            <input type="text" id="f-farm" class="list-input flex-grow" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="form-col form-col-full">
+                                        <label class="form-label">Relationship Status</label>
+                                        <div class="form-input-wrapper">
+                                            <span class="input-icon text-pink">𖹭</span>
+                                            <input type="text" id="f-status" class="list-input flex-grow" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Roster View (Left) -->
+                        <div id="view-roster-left" class="page-side page-left border-left hidden">
+                            <div class="page-header">
+                                <span class="header-icon">[=]</span>
+                                <h1 class="header-title">My Characters</h1>
+                            </div>
+                            <div class="scroll-area">
+                                <div id="roster-grid" class="roster-grid">
+                                    <div class="empty-state" id="empty-state">
+                                        No characters saved yet. Create one!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="binding"></div>
+
+                    <div class="page-wrapper">
+                        <!-- Create View (Right) -->
+                        <div id="view-create-right" class="page-side page-right border-right">
+                            <div class="right-content">
+                                <div class="gifts-container">
+                                    <h2 class="gift-title">
+                                        <span class="text-green">&lt;3</span> Loved Gifts
+                                    </h2>
+                                    <p class="gift-desc">Emojis or short words (csv):</p>
+                                    <input type="text" id="f-loved" class="list-input input-lg" value="" />
+
+                                    <h2 class="gift-title gift-title-mt">
+                                        <span class="text-blue">:)</span> Liked Gifts
+                                    </h2>
+                                    <p class="gift-desc">Emojis or short words (csv):</p>
+                                    <input type="text" id="f-liked" class="list-input input-lg" value="" />
+                                </div>
+
+                                <div class="save-container">
+                                    <button onclick="handleSaveButton()" class="save-btn">
+                                        [v] Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="tabs-container">
+                        <div id="tab-create" onclick="switchTab('create')" class="book-tab tab-star active-tab"
+                            title="Create Character">
+                            +
+                        </div>
+                        <div id="tab-roster" onclick="switchTab('roster')" class="book-tab tab-love"
+                            title="My Characters">
+                            =
+                        </div>
                     </div>
                 </div>
 
-                <div class="wireframe-box">
-                    <strong>Body & Face</strong><br><br>
-
-                    <label>
-                        Skin Color:
-                        <input type="color" id="c-skin" value="#eec3a3">
-                    </label>
-                    <br><br>
-
-                    <label>
-                        Eye Color:
-                        <input type="color" id="c-eye" value="#3377aa">
-                    </label>
-                    <br><br>
-
-                    <label>
-                        Face Color:
-                        <input type="color" id="c-face" value="#8b2f2f">
-                    </label>
-                    <button onclick="cycleStyle('face')">Face Style</button>
-                </div>
-
-                <div class="wireframe-box">
-                    <strong>Hair & Head</strong><br><br>
-
-                    <label>
-                        Hair Color:
-                        <input type="color" id="c-hair" value="#2b2d3e">
-                    </label>
-                    <button onclick="cycleStyle('hair')">Hair Style</button>
-
-                    <br><br>
-
-                    <label>
-                        Head Color:
-                        <input type="color" id="c-head" value="#6699cc">
-                    </label>
-                    <button onclick="cycleStyle('head')">Head Style</button>
-                </div>
-
-                <div class="wireframe-box">
-                    <strong>Wardrobe</strong><br><br>
-
-                    <label>
-                        Clothes Color:
-                        <input type="color" id="c-clothes" value="#39707e">
-                    </label>
-                    <button onclick="cycleStyle('clothes')">Clothes Style</button>
-
-                    <br><br>
-
-                    <label>
-                        Shoe Color:
-                        <input type="color" id="c-shoe" value="#333333">
-                    </label>
-                    <button onclick="cycleStyle('shoe')">Shoe Style</button>
-                </div>
+                <div class="center-shadow"></div>
             </div>
 
-            <!-- ROSTER VIEW -->
-            <div id="view-roster-left" style="display:none;">
-                <h2>My Characters</h2>
+            <div id="profile-modal" class="modal-overlay">
+                <div class="modal-content animate-pop">
+                    <button onclick="closeModal()" class="close-btn">X</button>
 
-                <div id="roster-grid">
-                    <div id="empty-state">No characters saved yet.</div>
+                    <div class="modal-book">
+                        <div class="modal-book-inner">
+                            <div class="modal-page modal-page-left">
+                                <div class="modal-portrait">
+                                    <div class="modal-heart-icon">&lt;3</div>
+                                    <div id="m-portrait" class="modal-sprite"></div>
+                                </div>
+                                <div class="modal-info-list">
+                                    <div class="modal-info-row">
+                                        <span class="modal-icon">@</span>
+                                        <span class="modal-text" id="m-name">Name</span>
+                                    </div>
+                                    <div class="modal-info-row">
+                                        <span class="modal-icon text-blue">?</span>
+                                        <span class="modal-text text-blue" id="m-gender">Gender</span>
+                                    </div>
+                                    <div class="modal-info-row">
+                                        <span class="modal-icon">*</span>
+                                        <span class="modal-text" id="m-bday">Birthday</span>
+                                    </div>
+                                    <div class="modal-info-row">
+                                        <span class="modal-icon">^</span>
+                                        <span class="modal-text" id="m-farm">Farm</span>
+                                    </div>
+                                    <div class="modal-info-row">
+                                        <span class="modal-icon text-pink">&lt;3</span>
+                                        <span class="modal-text text-pink" id="m-status">Status</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="binding"></div>
+
+                            <div class="modal-page modal-page-right">
+                                <div class="modal-gifts-wrapper">
+                                    <div class="modal-gift-section">
+                                        <h3 class="modal-gift-title">Loved</h3>
+                                        <div id="m-loved-grid" class="modal-gift-grid"></div>
+                                    </div>
+                                    <div class="flex-grow">
+                                        <h3 class="modal-gift-title">Liked</h3>
+                                        <div id="m-liked-grid" class="modal-gift-grid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Book Spine -->
-        <div class="spine"></div>
-                <!-- Right Page: Form & Save -->
-        <div class="page">
+        <script src="script.js"></script>
+    </body>
 
-            <!-- CREATE VIEW -->
-            <div id="view-create-right">
-                <h2>Character Details</h2>
-                
-                <div class="wireframe-box">
-                    <label>
-                        Name:
-                        <input type="text" id="f-name" placeholder="Character Name">
-                    </label>
-                    <br><br>
-
-                    <label>
-                        Gender:
-                        <input type="text" id="f-gender" placeholder="Gender">
-                    </label>
-                    <br><br>
-
-                    <label>
-                        Birthday:
-                        <input type="text" id="f-bday" placeholder="e.g. Spring 4">
-                    </label>
-                    <br><br>
-
-                    <label>
-                        Home Name:
-                        <input type="text" id="f-farm" placeholder="Farm Name">
-                    </label>
-                    <br><br>
-
-                    <label>
-                        Relationship Status:
-                        <input type="text" id="f-status" placeholder="Single / Married / etc.">
-                    </label>
-                    <br><br>
-
-                    <label>
-                        Loved Gifts:
-                        <input type="text" id="f-loved" placeholder="Apples, Gems...">
-                    </label>
-                    <br><br>
-
-                    <label>
-                        Liked Gifts:
-                        <input type="text" id="f-liked" placeholder="Bread, Fish...">
-                    </label>
-                </div>
-
-                <button onclick="handleSaveButton()" style="width: 100%; padding: 10px; cursor: pointer;">
-                    Save Character
-                </button>
-            </div>
-
-            <!-- ROSTER VIEW -->
-            <div id="view-roster-right" style="display:none;">
-                <h2>Character Preview</h2>
-
-                <div class="wireframe-box">
-                    <div id="roster-preview-sprite" style="height: 250px;"></div>
-                    <div id="roster-preview-placeholder">?</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tabs -->
-        <div class="tabs">
-            <div class="tab" onclick="switchTab('create')">Create</div>
-            <div class="tab" onclick="switchTab('roster')">Roster</div>
-        </div>
-
-    </div>
-
-    <!-- PROFILE MODAL -->
-    <div id="profile-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8);">
-        <div style="background:#fff; color:#000; width:700px; margin:50px auto; padding:20px; position:relative;">
-            <button onclick="closeModal()" style="position:absolute; top:10px; right:10px;">X</button>
-
-            <div style="display:flex; gap:20px;">
-                <div style="flex:1;">
-                    <div id="m-portrait" style="height:250px;"></div>
-
-                    <p><strong>Name:</strong> <span id="m-name"></span></p>
-                    <p><strong>Gender:</strong> <span id="m-gender"></span></p>
-                    <p><strong>Birthday:</strong> <span id="m-bday"></span></p>
-                    <p><strong>Farm:</strong> <span id="m-farm"></span></p>
-                    <p><strong>Status:</strong> <span id="m-status"></span></p>
-                </div>
-
-                <div style="flex:1;">
-                    <h3>Loved Gifts</h3>
-                    <div id="m-loved-grid"></div>
-
-                    <h3>Liked Gifts</h3>
-                    <div id="m-liked-grid"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="script.js"></script>
-</body>
 </html>

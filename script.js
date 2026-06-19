@@ -46,7 +46,7 @@ function generateSpriteSVG(app, isPortrait) {
     size +
     '" height="' +
     size +
-    '" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">';
+    '"shape-rendering="crispEdges">';
 
   if (!isPortrait) {
     svg += '<rect x="11" y="29" width="10" height="2" fill="rgba(0,0,0,0.1)"/>';
@@ -441,8 +441,6 @@ function generateSpriteSVG(app, isPortrait) {
     svg +=
       '<rect x="12" y="8" width="1" height="1" fill="' + app.hairColor + '" />';
     svg +=
-      '<rect x="15" y="8" width="2" height="1" fill="' + app.hairColor + '" />';
-    svg +=
       '<rect x="19" y="8" width="1" height="1" fill="' + app.hairColor + '" />';
   }
 
@@ -758,7 +756,6 @@ function switchTab(view) {
 // ---------------------------------------------------------
 function handleSaveButton() {
   saveCharacter();
-  switchTab("roster");
 }
 
 function parseGifts(inputString) {
