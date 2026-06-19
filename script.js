@@ -3,14 +3,23 @@
 // =========================================
 
 var defaultAppearance = {
+    skin: "#eec3a3",
+    eye: "#3377aa",
+    hairColor: "#2b2d3e",
     hairStyle: 1,
+    clothesColor: "#39707e",
     clothesStyle: 1,
+    shoeColor: "#333333",
     shoeStyle: 1,
+    faceColor: "#8b2f2f",
     faceStyle: 1,
+    headColor: "#6699cc",
+    headStyle: 1,
 };
 
 var appState = {
     appearance: Object.assign({}, defaultAppearance),
+    characters: [],
 };
 
 // =========================================
