@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skeleton - Character Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,44 +17,191 @@
         
         <!-- Left Page: Canvas & Tools -->
         <div class="page">
-            <h2>Create Character</h2>
-            
-            <div class="wireframe-box" style="height: 150px; text-align: center; line-height: 150px;">
-                [ Canvas Placeholder ]
+
+            <!-- CREATE VIEW -->
+            <div id="view-create-left">
+                <h2>Create Character</h2>
+                
+                <div class="wireframe-box">
+                    <div id="live-sprite" style="height: 250px;"></div>
+
+                    <div style="margin-top: 10px;">
+                        <button onclick="resetAppearance()">Reset</button>
+                        <button onclick="randomizeAppearance()">Random</button>
+                    </div>
+                </div>
+
+                <div class="wireframe-box">
+                    <strong>Body & Face</strong><br><br>
+
+                    <label>
+                        Skin Color:
+                        <input type="color" id="c-skin" value="#eec3a3">
+                    </label>
+                    <br><br>
+
+                    <label>
+                        Eye Color:
+                        <input type="color" id="c-eye" value="#3377aa">
+                    </label>
+                    <br><br>
+
+                    <label>
+                        Face Color:
+                        <input type="color" id="c-face" value="#8b2f2f">
+                    </label>
+                    <button onclick="cycleStyle('face')">Face Style</button>
+                </div>
+
+                <div class="wireframe-box">
+                    <strong>Hair & Head</strong><br><br>
+
+                    <label>
+                        Hair Color:
+                        <input type="color" id="c-hair" value="#2b2d3e">
+                    </label>
+                    <button onclick="cycleStyle('hair')">Hair Style</button>
+
+                    <br><br>
+
+                    <label>
+                        Head Color:
+                        <input type="color" id="c-head" value="#6699cc">
+                    </label>
+                    <button onclick="cycleStyle('head')">Head Style</button>
+                </div>
+
+                <div class="wireframe-box">
+                    <strong>Wardrobe</strong><br><br>
+
+                    <label>
+                        Clothes Color:
+                        <input type="color" id="c-clothes" value="#39707e">
+                    </label>
+                    <button onclick="cycleStyle('clothes')">Clothes Style</button>
+
+                    <br><br>
+
+                    <label>
+                        Shoe Color:
+                        <input type="color" id="c-shoe" value="#333333">
+                    </label>
+                    <button onclick="cycleStyle('shoe')">Shoe Style</button>
+                </div>
             </div>
 
-            <div class="wireframe-box">
-                <strong>Controls</strong><br><br>
-                <label>Skin Color: <input type="color"></label><br>
-                <label>Hair Color: <input type="color"></label>
+            <!-- ROSTER VIEW -->
+            <div id="view-roster-left" style="display:none;">
+                <h2>My Characters</h2>
+
+                <div id="roster-grid">
+                    <div id="empty-state">No characters saved yet.</div>
+                </div>
             </div>
         </div>
 
         <!-- Book Spine -->
         <div class="spine"></div>
-
-        <!-- Right Page: Form & Save -->
+                <!-- Right Page: Form & Save -->
         <div class="page">
-            <h2>Character Details</h2>
-            
-            <div class="wireframe-box">
-                <label>Name: <input type="text" placeholder="Character Name"></label><br><br>
-                <label>Birthday: <input type="text" placeholder="e.g. Spring 4"></label><br><br>
-                <label>Loved Gifts: <input type="text" placeholder="Apples, Gems..."></label>
+
+            <!-- CREATE VIEW -->
+            <div id="view-create-right">
+                <h2>Character Details</h2>
+                
+                <div class="wireframe-box">
+                    <label>
+                        Name:
+                        <input type="text" id="f-name" placeholder="Character Name">
+                    </label>
+                    <br><br>
+
+                    <label>
+                        Gender:
+                        <input type="text" id="f-gender" placeholder="Gender">
+                    </label>
+                    <br><br>
+
+                    <label>
+                        Birthday:
+                        <input type="text" id="f-bday" placeholder="e.g. Spring 4">
+                    </label>
+                    <br><br>
+
+                    <label>
+                        Home Name:
+                        <input type="text" id="f-farm" placeholder="Farm Name">
+                    </label>
+                    <br><br>
+
+                    <label>
+                        Relationship Status:
+                        <input type="text" id="f-status" placeholder="Single / Married / etc.">
+                    </label>
+                    <br><br>
+
+                    <label>
+                        Loved Gifts:
+                        <input type="text" id="f-loved" placeholder="Apples, Gems...">
+                    </label>
+                    <br><br>
+
+                    <label>
+                        Liked Gifts:
+                        <input type="text" id="f-liked" placeholder="Bread, Fish...">
+                    </label>
+                </div>
+
+                <button onclick="handleSaveButton()" style="width: 100%; padding: 10px; cursor: pointer;">
+                    Save Character
+                </button>
             </div>
 
-            <button style="width: 100%; padding: 10px; cursor: pointer;">
-                Save Character
-            </button>
+            <!-- ROSTER VIEW -->
+            <div id="view-roster-right" style="display:none;">
+                <h2>Character Preview</h2>
+
+                <div class="wireframe-box">
+                    <div id="roster-preview-sprite" style="height: 250px;"></div>
+                    <div id="roster-preview-placeholder">?</div>
+                </div>
+            </div>
         </div>
 
         <!-- Tabs -->
         <div class="tabs">
-            <div class="tab">Create</div>
-            <div class="tab">Roster</div>
+            <div class="tab" onclick="switchTab('create')">Create</div>
+            <div class="tab" onclick="switchTab('roster')">Roster</div>
         </div>
 
     </div>
 
+    <!-- PROFILE MODAL -->
+    <div id="profile-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8);">
+        <div style="background:#fff; color:#000; width:700px; margin:50px auto; padding:20px; position:relative;">
+            <button onclick="closeModal()" style="position:absolute; top:10px; right:10px;">X</button>
+
+            <div style="display:flex; gap:20px;">
+                <div style="flex:1;">
+                    <div id="m-portrait" style="height:250px;"></div>
+
+                    <p><strong>Name:</strong> <span id="m-name"></span></p>
+                    <p><strong>Gender:</strong> <span id="m-gender"></span></p>
+                    <p><strong>Birthday:</strong> <span id="m-bday"></span></p>
+                    <p><strong>Farm:</strong> <span id="m-farm"></span></p>
+                    <p><strong>Status:</strong> <span id="m-status"></span></p>
+                </div>
+
+                <div style="flex:1;">
+                    <h3>Loved Gifts</h3>
+                    <div id="m-loved-grid"></div>
+
+                    <h3>Liked Gifts</h3>
+                    <div id="m-liked-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
